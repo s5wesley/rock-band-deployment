@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rock-music-band
+  labels:
+    app: rock-music-band
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rock-music-band
+  template:
+    metadata:
+      labels:
+        app: rock-music-band
+    spec:
+      containers:
+      - name: rock-music-band
+        image: "{{ .Values.repository.assets.image }}:{{ .Values.repository.tag}}"
+        ports:
+        - containerPort: 80

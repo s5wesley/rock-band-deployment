@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-deploy
+  namespace: my-argocd2  # ArgoCD's namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/s5wesley/argocd-deploy.git
+    targetRevision: HEAD
+    path: "."  # Path to the Helm chart in the repository
+  destination:
+    server: https://kubernetes.default.svc  # The Kubernetes API server
+    namespace: wesley-app  # The namespace where you want to deploy the application
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
