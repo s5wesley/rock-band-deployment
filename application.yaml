@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argocd-deploy
-  namespace: my-argocd2  # ArgoCD's namespace
+  namespace: 2wesley-argocd  # ArgoCD's namespace
 spec:
   project: default
   source:
