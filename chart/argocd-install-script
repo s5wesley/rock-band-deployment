@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Define variables
+NAMESPACE="2wesley-argocd"
+HELM_REPO_NAME="argo"
+HELM_REPO_URL="https://argoproj.github.io/argo-helm"
+HELM_RELEASE_NAME="wesley4-my-argo-cd"  # Updated release name
+CHART_NAME="argo/argo-cd"
+CHART_VERSION="6.0.5"
+
+# Create the namespace if it doesn't exist
+kubectl create namespace $NAMESPACE || echo "Namespace $NAMESPACE already exists."
+
+# Add the ArgoCD Helm repository
+helm repo add $HELM_REPO_NAME $HELM_REPO_URL
+
+# Update the Helm repositories
+helm repo update
+
+# Install the ArgoCD Helm chart with timeout
+helm install $HELM_RELEASE_NAME $CHART_NAME --version $CHART_VERSION --namespace $NAMESPACE --set crds.install=false --timeout 10m0s
+
+# Patch the ArgoCD server service to NodePort
+kubectl patch svc ${HELM_RELEASE_NAME}-argocd-server -n $NAMESPACE -p '{"spec": {"type": "NodePort"}}'
+
+# Get the ArgoCD admin password
+echo "ArgoCD admin password:"
+kubectl -n $NAMESPACE get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d ; echo
+
+# Retrieve the external IP of the node
+echo "Node external IP:"
+kubectl get nodes -o wide
+
+# Get the services in the 2wesley-argocd namespace
+echo "Services in $NAMESPACE namespace:"
+kubectl get svc -n $NAMESPACE
