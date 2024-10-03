@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: rock-music-band
-        image: "{{ .Values.repository.assets.image }}:{{ .Values.repository.tag}}"
+        image: "{{ .Values.repository.assets.image }}:{{ .Values.repository.tag }}"
         ports:
         - containerPort: 80

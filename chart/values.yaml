@@ -1,4 +1,4 @@
 repository:
-   tag:  v$BUILD_NUMBER
-   assets:
+  tag: v{{ .Values.BUILD_NUMBER }}  # This will be replaced with the actual build number during deployment
+  assets:
     image: bulawesley/rock-music-band
