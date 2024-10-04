@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-deploy
+  name: rock-music-band
   namespace: 2wesley-argocd  # ArgoCD's namespace
 spec:
   project: default
   source:
-    repoURL: https://github.com/s5wesley/argocd-deploy.git
+    repoURL: https://github.com/s5wesley/rock-band-deployment.git
     targetRevision: HEAD
     path: chart  # Path to the Helm chart in the repository
   destination:
