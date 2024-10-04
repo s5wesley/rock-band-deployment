@@ -1,6 +1,4 @@
-
-Values:
-  repository:
-    assets:
-      image: devopseasylearning/s5wesley-rock-music-band
-    tag: "6"
+repository:
+  assets:
+    image: devopseasylearning/s5wesley-rock-music-band
+  tag: "6"
