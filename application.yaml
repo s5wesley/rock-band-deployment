@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: rock-music-band
-  namespace: 2wesley-argocd  # ArgoCD's namespace
+  namespace: argocd-dada3  # ArgoCD's namespace
 spec:
   project: default
   source:
